@@ -1,9 +1,6 @@
-import { useState } from "react";
-
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -12,8 +9,12 @@ import Radio from "@mui/material/Radio";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 
+import { useGetPhotos } from "./useGetPhotos";
+
 function App() {
-  const [images, setImages] = useState([]);
+  const { photos } = useGetPhotos({
+    searchKeywords: "cat",
+  });
 
   return (
     <Container component="main" sx={{ mb: 4 }}>
@@ -56,12 +57,17 @@ function App() {
             </FormControl>
           </Box>
         </Box>
-        <Grid container spacing={2} sx={{ height: 500 }}>
-          {images.map((image, index) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-              <Typography>image placeholder</Typography>
-            </Grid>
-          ))}
+        <Grid container spacing={2}>
+          {photos &&
+            photos.map((photo, index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <img
+                  src={photo.urls.thumb}
+                  alt={photo.user.username}
+                  style={{ width: "100%" }}
+                />
+              </Grid>
+            ))}
         </Grid>
         <Pagination
           count={1} // Set the total count of pages
