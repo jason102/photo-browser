@@ -93,6 +93,8 @@ export const useGetPhotos = ({ searchKeywords, searchFilter }: Props) => {
     }
   };
 
+  // When the user paginates to another page - if photos for a selected page already exist,
+  // directly return them below and avoid calling the API again.
   useEffect(() => {
     if (
       searchFilter === previousFilter.current &&
@@ -104,10 +106,12 @@ export const useGetPhotos = ({ searchKeywords, searchFilter }: Props) => {
     }
   }, [page, searchFilter, searchKeywords, photosPerPage]);
 
+  // When the search filter radio button is changed
   useEffect(() => {
     getPhotos();
   }, [searchFilter]);
 
+  // When the user types a search query
   useEffect(() => {
     if (searchKeywords.length > 0) {
       setIsTyping(true);

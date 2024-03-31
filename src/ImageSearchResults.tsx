@@ -25,33 +25,24 @@ const ImageSearchResults: React.FC = () => {
     searchFilter,
   });
 
+  const centeredContent = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 500,
+  };
+
   if (isLoading || isTyping) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: 500,
-        }}
-      >
-        <Typography>
-          <CircularProgress size={30} color="inherit" />
-        </Typography>
+      <Box sx={centeredContent}>
+        <CircularProgress size={30} color="inherit" />
       </Box>
     );
   }
 
   if (photos.length === 0 && !searchKeywords) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: 500,
-        }}
-      >
+      <Box sx={centeredContent}>
         <Typography>Enter a query above to search Unsplash photos!</Typography>
       </Box>
     );
@@ -59,14 +50,7 @@ const ImageSearchResults: React.FC = () => {
 
   if (errorMessage) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: 500,
-        }}
-      >
+      <Box sx={centeredContent}>
         <Typography>{errorMessage}</Typography>
       </Box>
     );
