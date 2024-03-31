@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
+
 import Grid from "@mui/material/Grid";
+
 import { useGetPhotos } from "src/hooks/useGetPhotos";
 import { SearchFiltersContext } from "src/context/SearchFiltersContext";
 

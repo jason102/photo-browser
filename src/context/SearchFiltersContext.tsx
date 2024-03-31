@@ -1,5 +1,6 @@
-import React, { createContext, useEffect, useState, useRef } from "react";
+import React, { createContext } from "react";
 import { useForm } from "react-hook-form";
+
 import { SearchControlValues, SearchFilter } from "src/types";
 
 export const SearchFiltersContext = createContext({

@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
-import { SearchFilter } from "src/types";
 import { createApi } from "unsplash-js";
 import { Basic as Photo } from "unsplash-js/dist/methods/photos/types";
+
+import { SearchFilter } from "src/types";
 
 const TYPING_DEBOUNCE_TIME = 500; // Half a second
 

@@ -5,8 +5,8 @@ import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/material/Typography";
 
-import SearchControls from "./SearchControls";
-import ImageSearchResults from "./ImageSearchResults";
+import SearchControls from "src/SearchControls";
+import ImageSearchResults from "src/ImageSearchResults";
 import SearchFiltersContext from "src/context/SearchFiltersContext";
 
 const App: React.FC = () => {
