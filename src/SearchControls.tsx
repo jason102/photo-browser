@@ -14,11 +14,10 @@ const SearchControls: React.FC = () => {
   const { register } = useContext(SearchFiltersContext);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row" }}>
-      <Box sx={{ display: "flex", flex: 1 }}>
+    <Box sx={{ display: "flex", flexDirection: "row", mb: 2 }}>
+      <Box sx={{ display: "flex", flex: 1, mr: 2 }}>
         <TextField
           {...register("searchKeywords")}
-          required
           id="searchKeywords"
           name="searchKeywords"
           label="Search photos..."

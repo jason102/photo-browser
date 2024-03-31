@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { useGetPhotos } from "src/hooks/useGetPhotos";
 import { SearchFiltersContext } from "src/context/SearchFiltersContext";
@@ -9,13 +12,70 @@ import { SearchFiltersContext } from "src/context/SearchFiltersContext";
 const ImageSearchResults: React.FC = () => {
   const { searchKeywords, searchFilter } = useContext(SearchFiltersContext);
 
-  const { photos, totalPages, page, setPage } = useGetPhotos({
+  const {
+    photos,
+    totalPages,
+    page,
+    setPage,
+    isLoading,
+    errorMessage,
+    isTyping,
+  } = useGetPhotos({
     searchKeywords,
     searchFilter,
   });
 
+  if (isLoading || isTyping) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: 500,
+        }}
+      >
+        <Typography>
+          <CircularProgress size={30} color="inherit" />
+        </Typography>
+      </Box>
+    );
+  }
+
+  if (photos.length === 0 && !searchKeywords) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: 500,
+        }}
+      >
+        <Typography>Enter a query above to search Unsplash photos!</Typography>
+      </Box>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: 500,
+        }}
+      >
+        <Typography>{errorMessage}</Typography>
+      </Box>
+    );
+  }
+
   return (
-    <>
+    <Box
+      sx={{ display: "flex", flex: 1, flexDirection: "column", minHeight: 500 }}
+    >
       <Grid container spacing={2}>
         {photos &&
           photos.map((photo, index) => (
@@ -39,7 +99,7 @@ const ImageSearchResults: React.FC = () => {
         }}
         onChange={(_, page) => setPage(page)}
       />
-    </>
+    </Box>
   );
 };
 

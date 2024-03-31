@@ -17,7 +17,7 @@ const App: React.FC = () => {
           elevation={16}
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
-          <Typography variant="h4" textAlign="center">
+          <Typography variant="h5" textAlign="center">
             Unsplash Photo Browser
           </Typography>
           <SearchControls />

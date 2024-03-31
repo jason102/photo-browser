@@ -19,6 +19,7 @@ interface Props {
 export const useGetPhotos = ({ searchKeywords, searchFilter }: Props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   const [photosPerPage, setPhotosPerPage] = useState<Record<number, Photo[]>>(
     {}
@@ -69,6 +70,10 @@ export const useGetPhotos = ({ searchKeywords, searchFilter }: Props) => {
         previousFilter.current = searchFilter;
       }
 
+      if (resultTotalPages === 0) {
+        setErrorMessage("No photos found for your query. Please try again.");
+      }
+
       if (resetToFirstPage) {
         setPhotosPerPage({ 1: results });
         setPage(1);
@@ -104,13 +109,19 @@ export const useGetPhotos = ({ searchKeywords, searchFilter }: Props) => {
   }, [searchFilter]);
 
   useEffect(() => {
+    if (searchKeywords.length > 0) {
+      setIsTyping(true);
+    }
+
     // Simple debouncing of the user's typing input
     const timeoutId = setTimeout(() => {
+      setIsTyping(false);
       getPhotos();
     }, TYPING_DEBOUNCE_TIME);
 
     return () => {
       // Clears the timeout each time the user presses a key
+      setIsTyping(false);
       clearTimeout(timeoutId);
     };
   }, [searchKeywords]);
@@ -122,5 +133,6 @@ export const useGetPhotos = ({ searchKeywords, searchFilter }: Props) => {
     page,
     setPage,
     totalPages,
+    isTyping,
   };
 };
