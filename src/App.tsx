@@ -2,7 +2,6 @@ import React from "react";
 
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/material/Typography";
 
 import SearchControls from "src/SearchControls";
@@ -23,16 +22,6 @@ const App: React.FC = () => {
           </Typography>
           <SearchControls />
           <ImageSearchResults />
-          <Pagination
-            count={1}
-            page={1}
-            color="primary"
-            style={{
-              marginTop: "20px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          />
         </Paper>
       </Container>
     </SearchFiltersContext>
