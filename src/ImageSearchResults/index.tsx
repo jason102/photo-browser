@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { useGetPhotos } from "src/hooks/useGetPhotos";
 import { SearchFiltersContext } from "src/context/SearchFiltersContext";
+import PhotoDetailsDialog from "./PhotoDetailsDialog";
 
 const ImageSearchResults: React.FC = () => {
   const { searchKeywords, searchFilter } = useContext(SearchFiltersContext);
@@ -24,6 +25,12 @@ const ImageSearchResults: React.FC = () => {
     searchKeywords,
     searchFilter,
   });
+
+  const [photoDetailsIndex, setPhotoDetailsIndex] = useState(-1);
+
+  const onPhotoClick = (index: number) => {
+    setPhotoDetailsIndex(index);
+  };
 
   const centeredContent = {
     display: "flex",
@@ -57,33 +64,47 @@ const ImageSearchResults: React.FC = () => {
   }
 
   return (
-    <Box
-      sx={{ display: "flex", flex: 1, flexDirection: "column", minHeight: 500 }}
-    >
-      <Grid container spacing={2}>
-        {photos &&
-          photos.map((photo, index) => (
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          flex: 1,
+          flexDirection: "column",
+          minHeight: 500,
+        }}
+      >
+        <Grid container spacing={2}>
+          {photos.map((photo, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <img
                 src={photo.urls.thumb}
                 alt={photo.user.username}
                 style={{ width: "100%" }}
+                onClick={() => onPhotoClick(index)}
               />
             </Grid>
           ))}
-      </Grid>
-      <Pagination
-        count={totalPages}
-        page={page}
-        color="primary"
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "center",
-        }}
-        onChange={(_, page) => setPage(page)}
-      />
-    </Box>
+        </Grid>
+        <Pagination
+          count={totalPages}
+          page={page}
+          color="primary"
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+          onChange={(_, page) => setPage(page)}
+        />
+      </Box>
+      {photos.length > 0 && (
+        <PhotoDetailsDialog
+          isOpen={photoDetailsIndex >= 0}
+          onCloseButtonClick={() => setPhotoDetailsIndex(-1)}
+          photo={photos[photoDetailsIndex]}
+        />
+      )}
+    </>
   );
 };
 
