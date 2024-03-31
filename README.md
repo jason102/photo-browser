@@ -1,30 +1,19 @@
-# React + TypeScript + Vite
+# Unsplash photo browser app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a demo app written using TypeScript/React/Vite that allows the user to browse [Unsplash](https://unsplash.com/) photos using the [Unsplash Photo API](https://unsplash.com/developers).
 
-Currently, two official plugins are available:
+## Running the app locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. In the root directory of the project run `npm install` to install the dependencies.
+2. Create a `.env.local` file in the root directory and add the following environment variable with your local testing Unsplash API access key (replace `XXXXXXX`):
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+VITE_UNSPLASH_ACCESS_KEY=XXXXXXX
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Run `npm run dev` to run the app on localhost. The app should be available at the default Vite server port at http://localhost:5173/
+
+## Building the app for production
+
+1. Create a `.env.production` file in the root directory of the project and specify your production environment Unsplash API key the same way the `.env.local` file was configured.
+2. Build the app using `npm run build`. The files in the generated `dist` director can be uploaded to your hosting provider.
