@@ -17,3 +17,7 @@ VITE_UNSPLASH_ACCESS_KEY=XXXXXXX
 
 1. Create a `.env.production` file in the root directory of the project and specify your production environment Unsplash API key the same way the `.env.local` file was configured.
 2. Build the app using `npm run build`. The files in the generated `dist` directory can be uploaded to your hosting provider.
+
+## Running the test cases
+
+Run `npm run test` to run some example test cases using Vitest and React Testing Library.
